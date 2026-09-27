@@ -52,6 +52,4 @@ This project demonstrates how **digital logic gates** (NOT + AND) can be used to
 ## 🚀 How to Run
 
 ### Web Simulation
-1. Clone this repository
-   ```bash
-   git clone https://github.com/sanidhya1372006-cpu/digital-lock-simulator.git
+Click On Click:https://sanidhya1372006-cpu.github.io/Digtal_Lock_System/
