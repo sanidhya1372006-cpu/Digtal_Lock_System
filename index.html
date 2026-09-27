@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-Bit Digital Combination Lock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>🔐 4-Bit Digital Combination Lock</h1>
+    <p class="subtitle">Interactive Simulation using Logic Gates (74HC04 + 74HC08)</p>
+    <p class="author">Digital Electronics Lab Project | Arya College of Engineering & IT, Jaipur</p>
+  </header>
+
+  <!-- MAIN SIMULATOR -->
+  <main>
+
+    <!-- LEFT: CIRCUIT SECTION -->
+    <section class="circuit-section">
+      <h2>⚡ Circuit Simulator</h2>
+
+      <!-- SWITCHES -->
+      <div class="switches">
+        <div class="switch-box">
+          <label>A</label>
+          <div class="switch" id="switchA" onclick="toggleSwitch('A')">
+            <div class="slider"></div>
+          </div>
+          <div class="led-input" id="ledA"></div>
+          <span class="bit-value" id="valA">0</span>
+        </div>
+        <div class="switch-box">
+          <label>B</label>
+          <div class="switch" id="switchB" onclick="toggleSwitch('B')">
+            <div class="slider"></div>
+          </div>
+          <div class="led-input" id="ledB"></div>
+          <span class="bit-value" id="valB">0</span>
+        </div>
+        <div class="switch-box">
+          <label>C</label>
+          <div class="switch" id="switchC" onclick="toggleSwitch('C')">
+            <div class="slider"></div>
+          </div>
+          <div class="led-input" id="ledC"></div>
+          <span class="bit-value" id="valC">0</span>
+        </div>
+        <div class="switch-box">
+          <label>D</label>
+          <div class="switch" id="switchD" onclick="toggleSwitch('D')">
+            <div class="slider"></div>
+          </div>
+          <div class="led-input" id="ledD"></div>
+          <span class="bit-value" id="valD">0</span>
+        </div>
+      </div>
+
+      <!-- BINARY DISPLAY -->
+      <div class="binary-display">
+        Entered: <span id="binaryValue">0000</span>
+      </div>
+
+      <!-- LOGIC GATES VISUAL -->
+      <div class="gates-visual">
+        <div class="gate not-gate" id="notGate">
+          <span>NOT</span>
+          <small>B → B'</small>
+        </div>
+        <div class="gate and-gate" id="and1">
+          <span>AND</span>
+          <small>A · B'</small>
+        </div>
+        <div class="gate and-gate" id="and2">
+          <span>AND</span>
+          <small>C · D</small>
+        </div>
+        <div class="gate and-gate final" id="and3">
+          <span>AND</span>
+          <small>MATCH</small>
+        </div>
+      </div>
+
+      <!-- BOOLEAN EXPRESSION -->
+      <div class="boolean-expr">
+        MATCH = A · B' · C · D
+      </div>
+
+      <!-- OUTPUT INDICATORS -->
+      <div class="outputs">
+        <div class="led-box">
+          <div class="big-led red" id="redLED"></div>
+          <span>RED LED (Wrong)</span>
+        </div>
+        <div class="led-box">
+          <div class="big-led green" id="greenLED"></div>
+          <span>GREEN LED (Correct)</span>
+        </div>
+      </div>
+
+      <!-- DOOR -->
+      <div class="door-container">
+        <h3>🚪 Physical Gate</h3>
+        <div class="door-frame">
+          <div class="door" id="door"></div>
+        </div>
+        <p class="door-status" id="doorStatus">🔴 LOCKED</p>
+      </div>
+
+      <!-- RESET -->
+      <button class="reset-btn" onclick="resetAll()">🔄 RESET</button>
+
+    </section>
+
+    <!-- RIGHT: INFO SECTION -->
+    <aside class="info-section">
+      <h2>📚 How It Works</h2>
+
+      <div class="info-card">
+        <h3>🎯 Password: 1011</h3>
+        <p>Set switches: A=1, B=0, C=1, D=1 to unlock the gate!</p>
+      </div>
+
+      <div class="info-card">
+        <h3>🔧 Components Used (Hardware)</h3>
+        <ul>
+          <li>74HC04 — NOT Gate IC</li>
+          <li>74HC08 — AND Gate IC</li>
+          <li>4x Slide Switches (A, B, C, D)</li>
+          <li>Green + Red LEDs</li>
+          <li>BC547 Transistor (Motor Driver)</li>
+          <li>DC Motor (opens gate)</li>
+          <li>1N4007 Diode (spike protection)</li>
+          <li>Resistors (330Ω, 1kΩ, 10kΩ)</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>⚙️ Logic Flow</h3>
+        <p>1. Switches give binary input (A, B, C, D)</p>
+        <p>2. NOT gate inverts B → B'</p>
+        <p>3. Three AND gates combine: (A·B') · (C·D)</p>
+        <p>4. If MATCH = 1 → Green LED + Motor ON → Door Opens</p>
+        <p>5. If MATCH = 0 → Red LED ON → Door stays locked</p>
+      </div>
+
+      <div class="info-card">
+        <h3>📊 Truth Table</h3>
+        <table class="truth-table" id="truthTable"></table>
+      </div>
+
+      <div class="info-card team-card">
+        <h3>👥 Our Team</h3>
+        <ul class="team-list">
+          <li>🎓 Sanidhya Sharma</li>
+          <li>🎓 Ridhima Gupta</li>
+          <li>🎓 Riddhi Pugalia</li>
+          <li>🎓 Ritik</li>
+          <li>🎓 Ritesh Bari</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Subject:</strong> Digital Electronics Lab</p>
+        <p><strong>Semester:</strong> 3rd Sem, B.Tech CSE</p>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer>
+    <p>⚡ Digital Electronics Project 2025 | Team: Sanidhya, Ridhima, Riddhi, Ritik & Ritesh ⚡</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
